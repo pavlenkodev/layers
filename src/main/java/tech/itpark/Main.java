@@ -1,14 +1,5 @@
 package tech.itpark;
 
-import tech.itpark.entity.UserEntity;
-import tech.itpark.repository.UserRepository;
-import tech.itpark.repository.UserRepositoryJDBCImpl;
-import tech.itpark.service.UserService;
-import tech.itpark.service.UserServiceDefaultImpl;
-
-import java.sql.*;
-import java.util.List;
-
 public class Main {
   public static void main(String[] args) {
     // жёсткая завязка на конкретный класс
