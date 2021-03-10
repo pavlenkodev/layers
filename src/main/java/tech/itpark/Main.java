@@ -17,11 +17,11 @@ public class Main {
 
     // JDBC connection URL
     // TODO: get from environment
-    String dsn = "jdbc:postgresql://localhost:5400/appdb?user=app&password=pass";
-    try (Connection connection = DriverManager.getConnection(dsn);) {
-      UserRepository repository = new UserRepositoryJDBCImpl(connection);
-      UserService service = new UserServiceDefaultImpl(repository);
-      List<UserEntity> users = repository.findAll();
+//    String dsn = "jdbc:postgresql://localhost:5400/appdb?user=app&password=pass";
+//    try (Connection connection = DriverManager.getConnection(dsn);) {
+//      UserRepository repository = new UserRepositoryJDBCImpl(connection);
+//      UserService service = new UserServiceDefaultImpl(repository);
+//      List<UserEntity> users = repository.findAll();
 
       // Just for test
       // Statement statement = connection.createStatement();
@@ -39,8 +39,8 @@ public class Main {
       // // index - starts from 1
       //   System.out.println(resultSet.getString("login"));
       // }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+//    } catch (SQLException e) {
+//      e.printStackTrace();
+//    }
   }
 }
