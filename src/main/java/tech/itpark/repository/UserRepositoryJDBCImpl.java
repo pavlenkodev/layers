@@ -2,6 +2,8 @@ package tech.itpark.repository;
 
 import tech.itpark.entity.UserEntity;
 import tech.itpark.exception.DataAccessException;
+import tech.itpark.exception.UserNotFoundException;
+import tech.itpark.exception.UsernameNotExistsException;
 import tech.itpark.jdbc.RowMapper;
 
 import java.sql.Connection;
@@ -54,10 +56,24 @@ public class UserRepositoryJDBCImpl implements UserRepository {
             throw new DataAccessException(e);
         }
     }
-
+    // В процессе, пока проверять не стоит
     @Override
-    public Optional<UserEntity> findById(Long aLong) {
-        return Optional.empty();
+    public Optional<UserEntity> findById(Long id) {
+        try (
+                final Statement stmt = connection.createStatement();
+                final ResultSet rs = stmt.executeQuery("SELECT id, login, password, name, secret, roles, EXTRACT(EPOCH FROM created) created, removed FROM users WHERE id = ?");
+        ) {
+            final Optional<UserEntity> entity = Optional.ofNullable(mapper.map(rs));
+
+            if (entity.isEmpty()) {
+                throw new UserNotFoundException();
+            }
+
+            return entity;
+
+        } catch (SQLException e) {
+            throw new DataAccessException();
+        }
     }
 
     @Override
